@@ -3,5 +3,4 @@
 	<li><a href="{{route('admin_list_cb')}}"><i class="fa fa-folder"></i><span>Danh sách cán bộ quản lý</span></a></li>
 	<li><a href="{{route('admin_info_cb')}}"><i class="fa fa-user"></i><span>Thông tin cán bộ quản lý</span></a></li>
 	<li><a href="{{route('admin_add_cb')}}"><i class="fa fa-check-square"></i><span>Tạo tài khoản quản lý</span></a></li>
-	<li><a href="{{route('admin_statics')}}"><i class="fa fa-bar-chart"></i><span>Thống kê</span></a></li>
 </ul>
