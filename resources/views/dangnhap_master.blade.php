@@ -14,10 +14,10 @@
         <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
-		<section class="login-block">
+		<section class="">
     		<div class="container">
     			<div class="row">
-        			<div class="col-md-4 login-sec">
+        			<div class="">
             			<h2 class="text-center">Ký túc xá <br> <br>Đại học Bách Khoa Hà Nội</h2>
 							@yield('content')
 					</div>
