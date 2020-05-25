@@ -1,0 +1,33 @@
+.error p{
+	color: red;
+}
+.calendar{
+	width: 800px;
+	margin: 0 auto;
+	padding-top: 30px;
+}
+.table.table-bordered.table-striped.datatable button{
+	height: 100%;
+	width: 100px;
+}
+.dataTables_paginate ul{
+	float: right;
+	padding-right: 80px;
+}
+.tab-content .box-content h3{
+	padding-top: 80px;
+	padding-bottom: 20px;
+}
+h4.thongbaoNull{
+	text-align: center;
+	padding-top: 50px;
+	color: red;
+	font-size: 16px;
+}
+.table.table-bordered.datatable button{
+	width: 100px;
+	height: 100%;
+}
+.error{
+	padding: 10px;
+}
