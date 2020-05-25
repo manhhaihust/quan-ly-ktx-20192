@@ -1,7 +1,6 @@
 # Tên đề tài
 Website QL Ký Túc Xá
 Nhóm: 17
-Trường: Đại học Bách Khoa Hà Nội
 ## Hướng dẫn cài đặt
 ### Window
 - Cài Xamp version 7.3.11 (php 7.3.11)
