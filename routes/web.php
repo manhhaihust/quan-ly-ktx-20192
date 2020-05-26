@@ -29,6 +29,7 @@ Route::post('changePassword','LoadController@changePassword');
 #------------Xem thông tin phòng----------------------------------------------------------------------------------------
 Route::get('cbql_phong','CanboController@ql_phong')->name('cbql_phong');
 Route::get('cbql_ttphong/{id}','LoadController@cbql_ttphong')->name('cbql_ttphong');
+Route::post('cbql_them_phong','CanboController@them_phong')->name('cbql_them_phong');
 
 #------------Xem thông tin sinh viên trong phòng------------------------------------------------------------------------
 Route::get('cbql_ttsv','CanboController@cbql_ttsv')->name('cbql_ttsv');

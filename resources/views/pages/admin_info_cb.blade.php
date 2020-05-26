@@ -3,7 +3,7 @@
 @section('content')
 <h3 style="">
     <i class="fa fa-arrow-circle-o-right"></i>
-    Thông tin cán bộ           
+    Tìm kiếm cán bộ           
 </h3>
 ﻿<div class="row">
         <div class="col-xs-6 col-left"></div>
