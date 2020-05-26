@@ -22,8 +22,19 @@ class CanboController extends Controller
     #----------------Xem Danh sách phòng--------------------------------------------------------------------------------
     public function ql_phong(){
         $id_khu = canboquanly::where('email',Auth::user()->email)->value('id_khu');
-        $ttphong = phong::where('id_khu',$id_khu)->paginate(7);
-        return view('pages.cbql_phong',['ttphong'=>$ttphong]);
+        $ttphong = phong::where('id_khu',$id_khu)->orderBy('id', 'desc')->paginate(7);
+        return view('pages.cbql_phong', ['ttphong' => $ttphong]);
+    }
+    #----------------Thêm phòng--------------------------------------------------------------------------------
+    public function them_phong(Request $request){
+        $id_khu = canboquanly::where('email',Auth::user()->email)->value('id_khu');
+        $phong = new phong();
+        $phong->sophong = $request->sophong;
+        $phong->id_khu = $id_khu;
+        $phong->snmax = $request->snmax;
+        $phong->gioitinh = $request->gioitinh;
+        $phong->save();
+        return redirect()->back();
     }
     #-------------Xem thông tin Sinh viên ------------------------------------------------------------------------------
     public function cbql_ttsv(){

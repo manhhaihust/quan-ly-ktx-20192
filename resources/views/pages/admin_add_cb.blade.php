@@ -8,7 +8,7 @@
         <ul class="nav nav-tabs bordered">
             <li class="active">
                 <a href="#list" data-toggle="tab"><i class="entypo-user"></i>
-                    Thông tin cán bộ
+                    Tìm kiếm cán bộ
                 </a>
             </li>
         </ul>
