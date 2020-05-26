@@ -1,6 +1,7 @@
 # Tên đề tài
 Website QL Ký Túc Xá
 Nhóm: 17
+Trường: Đại học Bách Khoa Hà Nội
 ## Hướng dẫn cài đặt
 ### Window
 - Cài Xamp version 7.3.11 (php 7.3.11)
@@ -8,10 +9,6 @@ Nhóm: 17
 - Tạo database mới và import file backup.sql trong folder createdb
 - Đổi tên .env.example thành .env
 - Sửa thông tin kết nối database
-- Cài composer tại https://getcomposer.org/download/
-- Mở command gõ composer install
-- php artisan key:generate
-- php artisan serve
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
