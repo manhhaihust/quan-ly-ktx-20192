@@ -48,14 +48,11 @@ class CanboController extends Controller
     public function cbql_duyetdk(){
         $id_khu = canboquanly::where('email',Auth::user()->email)->value('id_khu');
         $ttphong = phong::where('id_khu',$id_khu)->get();
-        $max = phong::where('id_khu',$id_khu)->max('id');
-        $count = phong::where('id_khu',$id_khu)->count();
+        $list_phong = phong::where('id_khu',$id_khu)->pluck('id');
         $list = phieudangky::where([
-            ['nam',date('Y')],
-            ['trangthaidk','registered'],
-            ['id_phong','>',($max-$count)],
-            ['id_phong','<=',$max]
-        ])->get();
+            'nam' => date('Y'),
+            'trangthaidk' => 'registered',
+        ])->whereIn('id_phong',$list_phong)->get();
         return view('pages.cbql_duyetdk',['list'=>$list,'ttphong'=>$ttphong]);
     }
 
