@@ -12,4 +12,5 @@ npm-debug.log
 yarn-error.log
 /.idea
 .idea
-
+package-lock.json
+composer.lock
