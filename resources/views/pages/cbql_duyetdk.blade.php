@@ -1,8 +1,8 @@
 @extends('master')
 @section('content')
     <h3 style="">
-         <i class="fa fa-arrow-circle-o-right"></i>
-            Danh sách sinh viên đăng ký phòng        
+         <i class="container"></i>
+            Danh sách sinh viên đăng ký phòng
     </h3>
     @if(count($list)==0)
         <h4 class="thongbaoNull">Danh sách sinh viên đăng ký trống</h4>
