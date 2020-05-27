@@ -77,18 +77,15 @@ class LoadController extends Controller
         $max = phong::where('id_khu',$id_khu)->max('id');
         $count = phong::where('id_khu',$id_khu)->count();
         $countsv = sinhvien::where('mssv',$mssv)->count();
+        $list_phong = phong::where('id_khu',$id_khu)->pluck('id');
         $countdk = phieudangky::where([
             ['mssv',$mssv],
-            ['trangthaidk','!=','cancelled'],
-            ['id_phong','>',($max-$count)],
-            ['id_phong','<=',$max]
-        ])->count();
+            ['trangthaidk','!=','cancelled']
+        ])->whereIn('id_phong',$list_phong)->count();
         $lsdk = phieudangky::where([
             ['mssv',$mssv],
-            ['trangthaidk','!=','cancelled'],
-            ['id_phong','>',($max-$count)],
-            ['id_phong','<=',$max]
-        ])->orderBy('nam','desc')->get();
+            ['trangthaidk','!=','cancelled']
+        ])->whereIn('id_phong',$list_phong)->orderBy('nam','desc')->get();
         $countdk = count($lsdk);
         $ttphong = phong::all();
         if ($countsv!=1) {
@@ -107,21 +104,16 @@ class LoadController extends Controller
     public function post_cbql_ttsv(Request $request){
         $id_khu = canboquanly::where('email',Auth::user()->email)->value('id_khu');
         $mssv = $request->input('mssv');
-        $max = phong::where('id_khu',$id_khu)->max('id');
-        $count = phong::where('id_khu',$id_khu)->count();
+        $list_phong = phong::where('id_khu',$id_khu)->pluck('id');
         $countsv = sinhvien::where('mssv',$mssv)->count();
         $countdk = phieudangky::where([
             ['mssv',$mssv],
-            ['trangthaidk','!=','cancelled'],
-            ['id_phong','>',($max-$count)],
-            ['id_phong','<=',$max]
-        ])->count();
+            ['trangthaidk','!=','cancelled']
+        ])->whereIn('id_phong',$list_phong)->count();
         $lsdk = phieudangky::where([
             ['mssv',$mssv],
-            ['trangthaidk','!=','cancelled'],
-            ['id_phong','>',($max-$count)],
-            ['id_phong','<=',$max]
-        ])->orderBy('nam','desc')->get();
+            ['trangthaidk','!=','cancelled']
+        ])->whereIn('id_phong',$list_phong)->orderBy('nam','desc')->get();
         $ttphong = phong::all();
         if ($countsv!=1) {
             return redirect('cbql_ttsv')->with(['flag'=>'danger','message'=>'Không tồn tại sinh viên']);
@@ -143,8 +135,7 @@ class LoadController extends Controller
         $year = $request->input('nam');
         $list_nam = phieudangky::select('nam')->groupBy('nam')->get();
         $id_khu = canboquanly::where('email',Auth::user()->email)->value('id_khu');
-        $max = phong::where('id_khu',$id_khu)->max('id');
-        $count = phong::where('id_khu',$id_khu)->count();
+        $list_phong = phong::where('id_khu',$id_khu)->pluck('id');
         $nam = phong::where([
             ['id_khu',$id_khu],
             ['gioitinh','nam'],
@@ -162,19 +153,15 @@ class LoadController extends Controller
             }
         }
         $total_student = phieudangky::where([
-            ['id_phong','>',($max-$count)],
-            ['id_phong','<=',$max],
             ['nam',$year],
             ['trangthaidk','!=','cancelled'],
             ['trangthaidk','!=','registered']
-        ])->count();
+        ])->whereIn('id_phong',$list_phong)->count();
         $total_money = phieudangky::where([
-            ['id_phong','>',($max-$count)],
-            ['id_phong','<=',$max],
             ['nam',$year],
             ['trangthaidk','!=','cancelled'],
             ['trangthaidk','!=','registered']
-        ])->sum('lephi');
+        ])->whereIn('id_phong',$list_phong)->sum('lephi');
         return view('pages.cbql_thongke',['nam'=>$nam,'nu'=>$nu,'nam_dkcur'=>$nam_dkcur,'nu_dkcur'=>$nu_dkcur,'total_student'=>$total_student,'total_money'=>$total_money,'list_nam'=>$list_nam,'year'=>$year]);
     }
 
@@ -341,10 +328,9 @@ class LoadController extends Controller
             $data = DB::table('sinhvien')->join('phieudangky','phieudangky.mssv','=','sinhvien.mssv')->join('phong','phieudangky.id_phong','=','phong.id')->get();
             $year = $request->input('nam');
             $id_khu = $request->input('mskhu');
+            $list_phong = phong::where('id_khu',$id_khu)->pluck('id');
             if (isset($year)&&isset($id_khu)){
                 $list_nam = phieudangky::select('nam')->groupBy('nam')->get();
-                $max = phong::where('id_khu',$id_khu)->max('id');
-                $count = phong::where('id_khu',$id_khu)->count();
                 $nam = phong::where([
                     ['id_khu',$id_khu],
                     ['gioitinh','nam'],
@@ -362,19 +348,15 @@ class LoadController extends Controller
                     }
                 }
                 $total_student = phieudangky::where([
-                    ['id_phong','>',($max-$count)],
-                    ['id_phong','<=',$max],
                     ['nam',$year],
                     ['trangthaidk','!=','cancelled'],
                     ['trangthaidk','!=','registered']
-                ])->count();
+                ])->whereIn('id_phong',$list_phong)->count();
                 $total_money = phieudangky::where([
-                    ['id_phong','>',($max-$count)],
-                    ['id_phong','<=',$max],
                     ['nam',$year],
                     ['trangthaidk','!=','cancelled'],
                     ['trangthaidk','!=','registered']
-                ])->sum('lephi');
+                ])->whereIn('id_phong',$list_phong)->sum('lephi');
                 $list_khu = khuktx::all();
                 $khu = khuktx::where('id',$request->input('mskhu'))->value('tenkhu'); 
                 return view('pages.admin_statics',['nam'=>$nam,'nu'=>$nu,'nam_dkcur'=>$nam_dkcur,'nu_dkcur'=>$nu_dkcur,'total_student'=>$total_student,'total_money'=>$total_money,'list_nam'=>$list_nam,'year'=>$year,'list_khu'=>$list_khu,'khu'=>$khu]);

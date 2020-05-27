@@ -60,6 +60,7 @@ class CanboController extends Controller
         $list_nam = phieudangky::select('nam')->groupBy('nam')->get();
         $year = Date('Y');
         $id_khu = canboquanly::where('email',Auth::user()->email)->value('id_khu');
+        $list_phong = phong::where('id_khu',$id_khu)->pluck('id');
         $max = phong::where('id_khu',$id_khu)->max('id');
         $count = phong::where('id_khu',$id_khu)->count();
         $nam = phong::where([
@@ -79,19 +80,15 @@ class CanboController extends Controller
             ['gioitinh','nu']
         ])->sum('sncur');
         $total_student = phieudangky::where([
-            ['id_phong','>',($max-$count)],
-            ['id_phong','<=',$max],
             ['nam',date('Y')],
             ['trangthaidk','!=','cancelled'],
             ['trangthaidk','!=','registered']
-        ])->count();
+        ])->whereIn('id_phong',$list_phong)->count();
         $total_money = phieudangky::where([
-            ['id_phong','>',($max-$count)],
-            ['id_phong','<=',$max],
             ['nam',date('Y')],
             ['trangthaidk','!=','cancelled'],
             ['trangthaidk','!=','registered']
-        ])->sum('lephi');
+        ])->whereIn('id_phong',$list_phong)->sum('lephi');
 
         return view('pages.cbql_thongke',['nam'=>$nam,'nu'=>$nu,'nam_dkcur'=>$nam_dkcur,'nu_dkcur'=>$nu_dkcur,'total_student'=>$total_student,'total_money'=>$total_money,'list_nam'=>$list_nam,'year'=>$year]);
     }
