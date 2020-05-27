@@ -156,7 +156,7 @@ class LoadController extends Controller
             ['nam',$year],
             ['trangthaidk','!=','cancelled'],
             ['trangthaidk','!=','registered']
-        ]->whereIn('id_phong',$list_phong))->count();
+        ])->whereIn('id_phong',$list_phong)->count();
         $total_money = phieudangky::where([
             ['nam',$year],
             ['trangthaidk','!=','cancelled'],
