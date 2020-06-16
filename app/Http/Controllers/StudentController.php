@@ -31,7 +31,7 @@ class StudentController extends Controller
 
     #----------Xem_trạng thái đăng_kí-----------------------------------------------------------------------------------
     public function student_xemdk(){
-        $mssv = sinhvien::where('email',Auth::user()->email)
+        $mssv = sinhvien::where('email',Auth::user()->email)->value('mssv');
         $lsdk = phieudangky::where('mssv','=',$mssv)->get();
         $ttphong = phong::all();
         $ttkhu = khuktx::all();

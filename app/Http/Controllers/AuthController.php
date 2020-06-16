@@ -14,17 +14,17 @@ use App\canboquanly;
 
 class AuthController extends Controller
 {
-    public function getlogin() {
+    public function getLogin() {
         if(Auth::check()){
             return redirect()->back();
         } else {
-    	   return view('auth.login')
+    	   return view('auth.login');
         }
     }
     public function postLogin(Request $request) {
     	$rules = [
     		'email' =>'required|email',
-    		'password' => 'required
+    		'password' => 'required|min:6'
     	];
     	$messages = [
     		'password.min' => 'Mật khẩu phải chứa ít nhất 6 ký tự',
@@ -59,15 +59,15 @@ class AuthController extends Controller
         ];
         $messages = [
             'password.min' => 'Mật khẩu phải chứa ít nhất 6 ký tự',
-            'password.confirmed' => 'Xác nhận mật khẩu không đúng'
-            'mssv.min' => 'Mã số sinh viên có độ dài là 8 ký tự
+            'password.confirmed' => 'Xác nhận mật khẩu không đúng',
+            'mssv.min' => 'Mã số sinh viên có độ dài là 8 ký tự'
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $email = $request->input('password');
+            $email = $request->input('email');
             $count = users::where('email',$email)->count();
             if($count>0){
                 return redirect()->back()->with(['flag'=>'danger','message'=>'Email đã được sử dụng']);   
