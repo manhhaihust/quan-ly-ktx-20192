@@ -38,7 +38,7 @@ class CanboController extends Controller
     }
     #-------------Xem thông tin Sinh viên ------------------------------------------------------------------------------
     public function cbql_ttsv(){
-        return view('pages.cbql_ttsv');
+        return view('pages.cbql_ttsv')
     }
     public function cbql_cpsv(){
         return view('pages.cbql_cpsv');
@@ -46,7 +46,7 @@ class CanboController extends Controller
 
     #---------------Duyệt ĐK--------------------------------------------------------------------------------------------
     public function cbql_duyetdk(){
-        $id_khu = canboquanly::where('email',Auth::user()->email)->value('id_khu');
+        $id_khu = canboquanly::where('email',Auth::user()->email)->value('id');
         $ttphong = phong::where('id_khu',$id_khu)->get();
         $list_phong = phong::where('id_khu',$id_khu)->pluck('id');
         $list = phieudangky::where([
