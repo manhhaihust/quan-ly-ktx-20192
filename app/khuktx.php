@@ -10,6 +10,6 @@ class khuktx extends Model
     public $timestamps =false;
 
     public function phong(){
-    	return $this->belongsTo('App','mskhu','id');
+    	return $this->belongsTo('App\phong','mskhu','id');
     }
 }

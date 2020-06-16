@@ -33,6 +33,8 @@ class StudentController extends Controller
     public function student_xemdk(){
         $mssv = sinhvien::where('email',Auth::user()->email)->value('mssv');
         $lsdk = phieudangky::where('mssv','=',$mssv)->get();
+        $ttphong = phong::all();
+        $ttkhu = khuktx::all();
         return view('pages.Student_xemdk',['lsdk'=>$lsdk,'ttphong'=>$ttphong,'ttkhu'=>$ttkhu]);
     }
 
